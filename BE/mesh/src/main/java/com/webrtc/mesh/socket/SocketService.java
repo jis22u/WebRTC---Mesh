@@ -22,13 +22,13 @@ public class SocketService {
 	 서버에서 브라우저로 보내
 	 sendSocketOffer()
 	 */
-	public void sendSocketOffer(SocketIOClient senderClient, Message sdpMessage) {
-		System.out.println("7. SocketService - 채팅쳤을 때 : saveMessage");
+	public void sendSocketOffer(SocketIOClient senderClient, Message message) {
+		System.out.println("SocketService - sendSocketOffer()");
 
 		for (
-				SocketIOClient client : senderClient.getNamespace().getRoomOperations(sdpMessage.getRoomName()).getClients()) {
+				SocketIOClient client : senderClient.getNamespace().getRoomOperations(message.getRoomName()).getClients()) {
 			if (!client.getSessionId().equals(senderClient.getSessionId())) {
-				client.sendEvent("offer", sdpMessage);
+				client.sendEvent("offer", message.getDatas());
 			}
 		}
 	}
@@ -37,13 +37,13 @@ public class SocketService {
 	서버에서 브라우저로 보내
 	sendSocketAnswer()
 	*/
-	public void sendSocketAnswer(SocketIOClient senderClient, Message sdpMessage) {
-		System.out.println("7. SocketService - 채팅쳤을 때 : saveMessage");
+	public void sendSocketAnswer(SocketIOClient senderClient, Message message) {
+		System.out.println("SocketService - sendSocketAnswer()");
 
 		for (
-				SocketIOClient client : senderClient.getNamespace().getRoomOperations(sdpMessage.getRoomName()).getClients()) {
+				SocketIOClient client : senderClient.getNamespace().getRoomOperations(message.getRoomName()).getClients()) {
 			if (!client.getSessionId().equals(senderClient.getSessionId())) {
-				client.sendEvent("answer", sdpMessage);
+				client.sendEvent("answer", message.getDatas());
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package com.webrtc.mesh.socket;
 
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
@@ -44,24 +45,44 @@ public class SocketModule {
 
 	/*
 	누군가 소켓에 연결할 때 트리거
+	프론트한테 welcome 하라고 명령~~~~~
 	 */
 	private ConnectListener onConnected() {
-		System.out.println("3 SocketModule. (2)");
+		System.out.println("SocketModule - onConnected()");
 
 		return (client) -> {
 			String roomName = client.getHandshakeData().getSingleUrlParam("roomName");
 			client.joinRoom(roomName);
-			client.sendEvent("welcome");
+
+//			수정중---------------------------------------------------------------------------------------------
+
+			for (
+					SocketIOClient temp : client.getNamespace().getRoomOperations(roomName).getClients()) {
+				if (!temp.getSessionId().equals(client.getSessionId())) {
+					temp.sendEvent("welcome");
+					System.out.println("temp" + temp.getSessionId());
+					System.out.println("client"+ client.getSessionId());
+				}
+			}
+
+			int size = client.getNamespace().getAllClients().size();
+//			if(size == 2) {
+//				client.sendEvent("welcome");
+//			}
+			System.out.println(size);
+
+//			---------------------------------------------------------------------------------------------------
+
 			log.info("Socket ID[{}] - roomName[{}]  Connected to chat module through", client.getSessionId().toString(), roomName);
 		};
 	}
 
 
 
-	//    ---------------- offer ------------------------
+	//    ---------------- offer & answer ------------------------
 	private DataListener<Message> getOffer() {
 
-		System.out.println("3 SocketModule. getOffer()");
+		System.out.println("SocketModule - getOffer()");
 
 		return (senderClient, data, ackSender) -> {
 			log.info(data.toString());
@@ -71,7 +92,7 @@ public class SocketModule {
 
 	private DataListener<Message> getAnswer() {
 
-		System.out.println("3 SocketModule. getAnswer()");
+		System.out.println("SocketModule - getAnswer()");
 
 		return (senderClient, data, ackSender) -> {
 			log.info(data.toString());
@@ -79,7 +100,7 @@ public class SocketModule {
 		};
 	}
 
-//    ---------------- offer ------------------------
+	//  ---------------- offer & answer ------------------------
 
 
 
@@ -87,7 +108,7 @@ public class SocketModule {
 	 누군가 소켓에서 연결을 끊을 때 트리거
 	 */
 	private DisconnectListener onDisconnected() {
-		System.out.println("3 SocketModule. (3)");
+		System.out.println("SocketModule - onDisconnected()");
 
 		return client -> {
 			String roomName = client.getHandshakeData().getSingleUrlParam("roomName");
