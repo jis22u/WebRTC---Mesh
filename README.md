@@ -71,6 +71,7 @@ SocketIO
 ## ref
 https://millo-l.github.io/WebRTC-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D-Mesh-SFU-MCU/    
 https://andonekwon.tistory.com/71     
+https://andonekwon.tistory.com/59    
 https://github.com/gurkanucar/socketio-simple-chat   
 https://medium.com/folksdev/spring-boot-netty-socket-io-example-3f21fcc1147d   
 https://doublem.org/webrtc-story-02/    
