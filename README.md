@@ -27,12 +27,14 @@ WebRTC를 위해 개발자가 구현할 수 있는 서버는 크게 세 종류�
 ```
 WebRTC 연결을 설정하기 위해 시그널링 서버가 필요합니다. 
 시그널링 서버는 피어 간의 정보 교환을 도와주고 연결을 설정하는 역할을 합니다.
-WebRTC 연결을 위한 SDP(Session Description Protocol) 교환 및 ICE(Interactive Connectivity Establishment) 프레임워크를
+WebRTC 연결을 위한 SDP(Session Description Protocol) 교환 및 
+ICE(Interactive Connectivity Establishment) 프레임워크를
 사용하여 피어 간의 네트워크 정보를 수집 및 교환합니다.
 ```
 
 ```
-시그널링 서버는 WebRTC의 연결 설정 단계에서 중요한 역할을 수행하지만, 그 자체로는 Mesh 방식과 직접적으로 연관되지는 않습니다.
+시그널링 서버는 WebRTC의 연결 설정 단계에서 중요한 역할을 수행하지만,
+그 자체로는 Mesh 방식과 직접적으로 연관되지는 않습니다.
 
 Mesh 방식은 WebRTC의 통신 구조에 대한 개념이며, 피어 간에 직접적인 연결을 형성하는 방식을 말합니다.
 Mesh 방식에서는 각 피어가 다른 피어와 직접적으로 연결되어 모든 피어 간에 통신 경로가 형성됩니다.
@@ -41,7 +43,8 @@ Mesh 방식에서는 각 피어가 다른 피어와 직접적으로 연결되어
 
 시그널링 서버는 WebRTC의 연결 설정 단계에서 필요한 역할을 수행합니다. 
 시그널링 서버는 피어 간의 연결을 설정하기 위한 초기 정보 교환과 네트워크 설정을 돕는 역할을 합니다. 
-SDP(Session Description Protocol) 정보와 ICE(Interactive Connectivity Establishment) 후보자 정보를 주고받고,
+SDP(Session Description Protocol) 정보와 
+ICE(Interactive Connectivity Establishment) 후보자 정보를 주고받고,
 피어 간의 연결을 설정하기 위한 중계 역할을 담당합니다.
 
 Mesh 방식에서는 시그널링 서버가 모든 피어 간의 연결 정보를 직접적으로 관리하지 않습니다. 
